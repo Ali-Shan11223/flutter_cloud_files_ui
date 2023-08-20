@@ -110,12 +110,58 @@ class _HomeScreenState extends State<HomeScreen> {
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                       color: Colors.blue),
-                )
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25),
+            child: Row(
+              children: [
+                fileChart('SOURCES', Colors.blue, 0.3),
+                const SizedBox(
+                  width: 2,
+                ),
+                fileChart('DOCS', Colors.red, 0.25),
+                const SizedBox(
+                  width: 2,
+                ),
+                fileChart('IMAGES', Colors.yellow, 0.20),
+                const SizedBox(
+                  width: 2,
+                ),
+                fileChart('', Colors.grey.shade300, 0.23)
               ],
             ),
           )
         ],
       ),
+    );
+  }
+
+  Column fileChart(String title, Color? color, double width) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          height: 4,
+          width: availableScreenWidth * width,
+          color: color,
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        Text(
+          title,
+          style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+        )
+      ],
     );
   }
 }
