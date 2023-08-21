@@ -111,9 +111,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       fontWeight: FontWeight.bold,
                       color: Colors.blue),
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
               ],
             ),
           ),
@@ -139,9 +136,107 @@ class _HomeScreenState extends State<HomeScreen> {
                 fileChart('', Colors.grey.shade300, 0.23)
               ],
             ),
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          const Divider(
+            height: 20,
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          Expanded(
+            child: ListView(
+              padding: const EdgeInsets.symmetric(horizontal: 25),
+              children: [
+                const Text('Recently Updated',
+                    style:
+                        TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                const SizedBox(
+                  height: 15,
+                ),
+                Row(children: [
+                  recentUpdates('Desktop', '.sketch', 'sketch'),
+                  SizedBox(width: availableScreenWidth * 0.03),
+                  recentUpdates('Mobile', '.sketch', 'sketch'),
+                  SizedBox(width: availableScreenWidth * 0.03),
+                  recentUpdates('Interaction', '.prd', 'prd'),
+                ]),
+                const SizedBox(
+                  height: 10,
+                ),
+                const Divider(
+                  height: 20,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Projects',
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black),
+                    ),
+                    Text(
+                      'Create New',
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blue),
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                buildProjectRow('ChatBox'),
+                buildProjectRow('TimeNote'),
+                buildProjectRow('MyProject'),
+                buildProjectRow('Something')
+              ],
+            ),
           )
         ],
       ),
+    );
+  }
+
+  Column recentUpdates(String title, String ext, String image) {
+    return Column(
+      children: [
+        Container(
+          height: 110,
+          width: availableScreenWidth * 0.31,
+          padding: const EdgeInsets.all(30),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20), color: Colors.grey[200]),
+          child: Image.asset('assets/images/$image.png', fit: BoxFit.contain),
+        ),
+        const SizedBox(
+          height: 15,
+        ),
+        RichText(
+          text: TextSpan(
+              text: title,
+              style: const TextStyle(
+                  fontSize: 14,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold),
+              children: [
+                TextSpan(
+                    text: ext,
+                    style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w300))
+              ]),
+        )
+      ],
     );
   }
 
@@ -159,9 +254,39 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         Text(
           title,
-          style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
         )
       ],
+    );
+  }
+
+  Widget buildProjectRow(String title) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+          color: Colors.grey[200], borderRadius: BorderRadius.circular(20)),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              Icon(Icons.folder, color: Colors.blue[200]),
+              const SizedBox(
+                width: 12,
+              ),
+              Text(
+                title,
+                style: const TextStyle(fontSize: 16, color: Colors.black),
+              )
+            ],
+          ),
+          Icon(
+            Icons.more_vert,
+            color: Colors.grey.shade500,
+          )
+        ],
+      ),
     );
   }
 }
