@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_cloud_files_ui/screens/project_page.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -21,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
             alignment: Alignment.bottomCenter,
-            height: 170,
+            height: 200,
             decoration: BoxDecoration(color: Colors.blue.shade800),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -203,6 +204,32 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: Colors.blue,
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomNavigationBar(
+          onTap: (value) {
+            setState(() {
+              selectedIndex = value;
+            });
+          },
+          currentIndex: selectedIndex,
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          items: const [
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.timer,
+                ),
+                label: 'Time'),
+            BottomNavigationBarItem(icon: Icon(Icons.add_box), label: 'Add')
+          ]),
     );
   }
 
@@ -261,31 +288,37 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget buildProjectRow(String title) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 10),
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-          color: Colors.grey[200], borderRadius: BorderRadius.circular(20)),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              Icon(Icons.folder, color: Colors.blue[200]),
-              const SizedBox(
-                width: 12,
-              ),
-              Text(
-                title,
-                style: const TextStyle(fontSize: 16, color: Colors.black),
-              )
-            ],
-          ),
-          Icon(
-            Icons.more_vert,
-            color: Colors.grey.shade500,
-          )
-        ],
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => ProjectPage(projectName: title,)));
+      },
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 10),
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+            color: Colors.grey[200], borderRadius: BorderRadius.circular(20)),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                Icon(Icons.folder, color: Colors.blue[200]),
+                const SizedBox(
+                  width: 12,
+                ),
+                Text(
+                  title,
+                  style: const TextStyle(fontSize: 16, color: Colors.black),
+                )
+              ],
+            ),
+            Icon(
+              Icons.more_vert,
+              color: Colors.grey.shade500,
+            )
+          ],
+        ),
       ),
     );
   }
