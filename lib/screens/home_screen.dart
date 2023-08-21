@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_cloud_files_ui/components/bottom_navBar.dart';
 import 'package:flutter_cloud_files_ui/screens/project_page.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -149,6 +150,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           Expanded(
             child: ListView(
+              physics: const BouncingScrollPhysics(),
               padding: const EdgeInsets.symmetric(horizontal: 25),
               children: [
                 const Text('Recently Updated',
@@ -213,23 +215,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomNavigationBar(
-          onTap: (value) {
-            setState(() {
-              selectedIndex = value;
-            });
-          },
-          currentIndex: selectedIndex,
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          items: const [
-            BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.timer,
-                ),
-                label: 'Time'),
-            BottomNavigationBarItem(icon: Icon(Icons.add_box), label: 'Add')
-          ]),
+      bottomNavigationBar: const BottomNavBar()
     );
   }
 
@@ -291,7 +277,11 @@ class _HomeScreenState extends State<HomeScreen> {
     return GestureDetector(
       onTap: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => ProjectPage(projectName: title,)));
+            context,
+            MaterialPageRoute(
+                builder: (context) => ProjectPage(
+                      projectName: title,
+                    )));
       },
       child: Container(
         margin: const EdgeInsets.only(bottom: 10),

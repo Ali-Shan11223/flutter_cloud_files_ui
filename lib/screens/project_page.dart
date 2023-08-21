@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_cloud_files_ui/components/bottom_navBar.dart';
 
 class ProjectPage extends StatefulWidget {
   final String projectName;
@@ -18,7 +19,7 @@ class _ProjectPageState extends State<ProjectPage> {
             alignment: Alignment.bottomCenter,
             padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
             height: 200,
-            decoration: BoxDecoration(color: Colors.grey[100]),
+            decoration: BoxDecoration(color: Colors.grey[200]),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -46,7 +47,7 @@ class _ProjectPageState extends State<ProjectPage> {
                     Container(
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            color: Colors.black.withOpacity(0.1)),
+                            color: Colors.black.withOpacity(0.2)),
                         child: IconButton(
                           onPressed: () {},
                           icon: const Icon(
@@ -61,7 +62,7 @@ class _ProjectPageState extends State<ProjectPage> {
                     Container(
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            color: Colors.black.withOpacity(0.1)),
+                            color: Colors.black.withOpacity(0.2)),
                         child: IconButton(
                           onPressed: () {},
                           icon: const Icon(
@@ -90,9 +91,61 @@ class _ProjectPageState extends State<ProjectPage> {
                 buildAvatar('adam', 'Adam'),
               ],
             ),
-          )
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          const Divider(
+            height: 20,
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          Expanded(
+              child: ListView(
+            physics: const BouncingScrollPhysics(),
+            padding: const EdgeInsets.symmetric(horizontal: 25),
+            children: [
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Files',
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black)),
+                  Text(
+                    'Create new',
+                    style: TextStyle(
+                        color: Colors.blue,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold),
+                  )
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              builFilesRow('Assets'),
+              builFilesRow('Brandbook'),
+              builFilesRow('Design'),
+              builFilesRow('Moodboards'),
+              builFilesRow('Wireframes'),
+              builFilesRow('Story'),
+            ],
+          ))
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.blue,
+        onPressed: () {},
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomNavBar(),
     );
   }
 
@@ -111,6 +164,41 @@ class _ProjectPageState extends State<ProjectPage> {
           Text(
             name,
             style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget builFilesRow(String title) {
+    return Container(
+      padding: const EdgeInsets.all(20),
+      margin: const EdgeInsets.only(bottom: 10),
+      decoration: BoxDecoration(
+        color: Colors.grey[200],
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              Icon(
+                Icons.folder,
+                color: Colors.blue[200],
+              ),
+              const SizedBox(
+                width: 12,
+              ),
+              Text(
+                title,
+                style: const TextStyle(fontSize: 16),
+              )
+            ],
+          ),
+          Icon(
+            Icons.more_vert,
+            color: Colors.grey.shade500,
           )
         ],
       ),
